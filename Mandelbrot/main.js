@@ -1,22 +1,18 @@
-var camera, scene, renderer;
-var geometry, material, mesh;
-var uniforms;
+let camera, scene, renderer;
+let geometry, material, mesh;
+let uniforms;
 
-var aspect = window.innerWidth / window.innerHeight;
-var zoom = 4.0;
-var offset = new THREE.Vector2(-2.0*aspect, -2.0);
+let aspect = window.innerWidth / window.innerHeight;
+let zoom = 4.0;
+let offset = new THREE.Vector2(-2.0*aspect, -2.0);
 
-var gui = new dat.GUI({width: 300});
-var parameters = {
+let parameters = {
   a: 1.01,
   b: 0.01,
   c: 0.01,
   d: 0.01,
   e: 0.01,
   f: 0.01
-}
-for (var key in parameters){
-  gui.add(parameters, key, -5.0, 5.0).onChange(updateUniforms);
 }
 
 init();
@@ -94,9 +90,7 @@ float mandelbrot(vec2 c){
     vec2 z_1_sq = vec2(x_1_sq - y_1_sq, 2.0*z_1.x*z_1.y);
 
     // the recurrence equation
-    z = pset1.x*z_0_sq + c + pset1.y*z_1_sq
-    + pset1.z*cm(z_1_sq, z_2) + pset2.x*cm(z_1_sq, z_0)
-    + pset2.y*cm(z_2, z_0) + pset2.z*cm(z_1, z_2);
+    z = pset1.x*z_0_sq + c + pset1.y*z_1_sq + pset1.z*cm(z_1_sq, z_2) + pset2.x*cm(z_1_sq, z_0) + pset2.y*cm(z_2, z_0) + pset2.z*cm(z_1, z_2);
 
     float z_0_mag = x_0_sq + y_0_sq;
     float z_1_mag = x_1_sq + y_1_sq;
